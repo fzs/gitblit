@@ -1181,12 +1181,31 @@ table.repositories td.icon img {
 }
 
 table.repositories tr.group {
-	background-color: #ccc;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
+	background-color: #bbb;
+	border-left: 1px solid #bbb;
+	border-right: 1px solid #bbb;
 }
 
 table.repositories tr.group td {
+	font-weight: bold;		
+	color: black;
+	background-color: #c0c0c0;
+	padding-left: 5px;
+	border-top: 1px solid #909090; 	
+ 	border-bottom: 1px solid #909090; 
+}
+
+table.repositories tr.group td a {
+	color: black;
+}
+
+table.repositories tr.subgroup {
+	background-color: #bbb;
+	border-left: 1px solid #bbb;
+	border-right: 1px solid #bbb;
+}
+
+table.repositories tr.subgroup td {
 	font-weight: bold;		
 	color: black;
 	background-color: #ddd;
@@ -1195,7 +1214,7 @@ table.repositories tr.group td {
  	border-bottom: 1px solid #aaa; 
 }
 
-table.repositories tr.group td a {
+table.repositories tr.subgroup td a {
 	color: black;
 }
 

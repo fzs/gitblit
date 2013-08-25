@@ -113,6 +113,10 @@ public class RepositoriesPanel extends BasePanel {
 					rootRepositories.add(model);
 				} else {
 					// non-root, grouped repository
+					String rootProject = StringUtils.getFirstPathElement(rootPath);
+					if (!StringUtils.isEmpty(rootProject) && !groups.containsKey(rootProject)) {
+						groups.put(rootProject, new ArrayList<RepositoryModel>());
+					}
 					if (!groups.containsKey(rootPath)) {
 						groups.put(rootPath, new ArrayList<RepositoryModel>());
 					}
@@ -165,22 +169,33 @@ public class RepositoriesPanel extends BasePanel {
 				if (entry instanceof GroupRepositoryModel) {
 					GroupRepositoryModel groupRow = (GroupRepositoryModel) entry;
 					currGroupName = entry.name;
-					Fragment row = new Fragment("rowContent", "groupRepositoryRow", this);
+					Fragment row = new Fragment("rowContent", groupRow.level > 0 ? "subGroupRepositoryRow" : "groupRepositoryRow", this);
 					item.add(row);
 					
+					Component gname;
 					String name = groupRow.name;
 					if (name.charAt(0) == '~') {
 						// user page
 						String username = name.substring(1);
 						UserModel user = GitBlit.self().getUserModel(username);
-						row.add(new LinkPanel("groupName", null, (user == null ? username : user.getDisplayName()) + " (" + groupRow.count + ")", UserPage.class, WicketUtils.newUsernameParameter(username)));
+						row.add(new Label("groupRoot", "User"));
+						gname = new LinkPanel("groupName", null, (user == null ? username : user.getDisplayName()) + " (" + groupRow.count + ")", UserPage.class, WicketUtils.newUsernameParameter(username));
+						row.add(gname);
 						row.add(new Label("groupDescription", getString("gb.personalRepositories")));
 					} else {
 						// project page
-						row.add(new LinkPanel("groupName", null, groupRow.toString(), ProjectPage.class, WicketUtils.newProjectParameter(entry.name)));
+						row.add(new Label("groupRoot", groupRow.rootToString()));
+						gname = new LinkPanel("groupName", null, groupRow.toString(), ProjectPage.class, WicketUtils.newProjectParameter(entry.name));
+						row.add(gname);
 						row.add(new Label("groupDescription", entry.description == null ? "":entry.description));
 					}
-					WicketUtils.setCssClass(item, "group");
+					if (groupRow.level > 0) {
+						WicketUtils.setCssClass(item, "subgroup");
+//						String indent = "padding-left:" + 3 * groupRow.level + "em;";
+//						WicketUtils.setCssStyle(gname, indent);
+					} else {
+						WicketUtils.setCssClass(item, "group");
+					}
 					// reset counter so that first row is light background
 					counter = 0;
 					return;
@@ -396,15 +411,23 @@ public class RepositoriesPanel extends BasePanel {
 
 		int count;
 		String title;
-
+		int level = 0;
+		
 		GroupRepositoryModel(String name, int count) {
 			super(name, "", "", new Date(0));
 			this.count = count;
+
+			int index = -1;
+			while ((index = name.indexOf('/', index+1)) > -1) level++;
 		}
 
+		public String rootToString() {
+//			return (StringUtils.isEmpty(title) ? StringUtils.getRootPath(name) : "empty");
+			return (level > 0 ? StringUtils.getRootPath(name) + "/" : StringUtils.getRootPath(name));
+		}
 		@Override
 		public String toString() {
-			return (StringUtils.isEmpty(title) ? name  : title) + " (" + count + ")";
+			return (StringUtils.isEmpty(title) ? name.substring(name.lastIndexOf('/')+1) : title) + " (" + count + ")";
 		}
 	}
 
