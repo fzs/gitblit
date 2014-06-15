@@ -127,7 +127,7 @@ public class ServicesManager implements IServicesManager {
 	}
 
 	protected String getRepositoryUrl(HttpServletRequest request, String username, RepositoryModel repository) {
-		String gitblitUrl = settings.getString(Keys.web.canonicalUrl, null);
+		String gitblitUrl = settings.getString(Keys.web.canonicalGitUrl, null);
 		if (StringUtils.isEmpty(gitblitUrl)) {
 			gitblitUrl = HttpUtils.getGitblitURL(request);
 		}
