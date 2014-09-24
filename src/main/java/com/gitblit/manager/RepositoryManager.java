@@ -898,6 +898,7 @@ public class RepositoryManager implements IRepositoryManager {
 			model.acceptNewPatchsets = getConfig(config, "acceptNewPatchsets", true);
 			model.acceptNewTickets = getConfig(config, "acceptNewTickets", true);
 			model.requireApproval = getConfig(config, "requireApproval", settings.getBoolean(Keys.tickets.requireApproval, false));
+			model.contributorsCanPushToAllTickets = getConfig(config, "pushToAllTickets", false);
 			model.mergeTo = getConfig(config, "mergeTo", null);
 			model.useIncrementalPushTags = getConfig(config, "useIncrementalPushTags", false);
 			model.incrementalPushTagPrefix = getConfig(config, "incrementalPushTagPrefix", null);
@@ -1554,6 +1555,7 @@ public class RepositoryManager implements IRepositoryManager {
 			// override default
 			config.setBoolean(Constants.CONFIG_GITBLIT, null, "requireApproval", repository.requireApproval);
 		}
+		config.setBoolean(Constants.CONFIG_GITBLIT, null, "pushToAllTickets", repository.contributorsCanPushToAllTickets);
 		if (!StringUtils.isEmpty(repository.mergeTo)) {
 			config.setString(Constants.CONFIG_GITBLIT, null, "mergeTo", repository.mergeTo);
 		}

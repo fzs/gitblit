@@ -790,6 +790,7 @@ public class PatchsetReceivePack extends GitblitReceivePack {
 		// confirm user can push the patchset
 		boolean pushPermitted = ticket == null
 				|| !ticket.hasPatchsets()
+				|| repository.contributorsCanPushToAllTickets
 				|| ticket.isAuthor(user.username)
 				|| ticket.isPatchsetAuthor(user.username)
 				|| ticket.isResponsible(user.username)

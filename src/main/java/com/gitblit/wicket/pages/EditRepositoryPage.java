@@ -453,6 +453,11 @@ public class EditRepositoryPage extends RootSubPage {
 				getString("gb.requireApprovalDescription"),
 				new PropertyModel<Boolean>(repositoryModel, "requireApproval")));
 
+		form.add(new BooleanOption("pushToAllTickets",
+				getString("gb.pushToAllTickets"),
+				getString("gb.pushToAllTicketsDescription"),
+				new PropertyModel<Boolean>(repositoryModel, "contributorsCanPushToAllTickets")));
+
 		form.add(new ChoiceOption<String>("mergeTo",
 				getString("gb.mergeTo"),
 				getString("gb.mergeToDescription"),
