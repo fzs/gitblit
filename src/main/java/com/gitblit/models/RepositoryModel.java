@@ -89,6 +89,7 @@ public class RepositoryModel implements Serializable, Comparable<RepositoryModel
 	public boolean acceptNewPatchsets;
 	public boolean acceptNewTickets;
 	public boolean requireApproval;
+	public boolean contributorsCanPushToAllTickets;
 	public String mergeTo;
 	public MergeType mergeType;
 
@@ -114,6 +115,7 @@ public class RepositoryModel implements Serializable, Comparable<RepositoryModel
 		this.acceptNewTickets = true;
 		this.acceptNewPatchsets = true;
 		this.mergeType = MergeType.DEFAULT_MERGE_TYPE;
+		this.contributorsCanPushToAllTickets = false;
 
 		addOwner(owner);
 	}
@@ -224,6 +226,7 @@ public class RepositoryModel implements Serializable, Comparable<RepositoryModel
 		clone.allowForks = false;
 		clone.acceptNewPatchsets = false;
 		clone.acceptNewTickets = false;
+		clone.contributorsCanPushToAllTickets = false;
 		clone.skipSizeCalculation = skipSizeCalculation;
 		clone.skipSummaryMetrics = skipSummaryMetrics;
 		clone.sparkleshareId = sparkleshareId;
