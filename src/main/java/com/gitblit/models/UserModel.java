@@ -513,6 +513,23 @@ public class UserModel implements Principal, Serializable, Comparable<UserModel>
 	}
 
 	/**
+	 * This returns true if the user has admin privileges or the user has admin
+	 * privileges because of a team membership.
+	 *
+	 * @return true if the user can admin
+	 */
+	public boolean isInAdminTeam() {
+		if (!ArrayUtils.isEmpty(teams)) {
+			for (TeamModel team : teams) {
+				if (team.canAdmin) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * This returns true if the user has create privileges or the user has create
 	 * privileges because of a team membership.
 	 *
