@@ -27,6 +27,7 @@ import org.apache.wicket.extensions.markup.html.form.palette.Palette;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.HiddenField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
@@ -252,13 +253,13 @@ public class EditUserPage extends RootSubPage {
 		form.add(new TextField<String>("displayName").setEnabled(editDisplayName));
 		form.add(new TextField<String>("emailAddress").setEnabled(editEmailAddress));
 
-		if (userModel.canAdmin() && !userModel.canAdmin) {
+		if (userModel.isInAdminTeam()) {
 			// user inherits Admin permission
-			// display a disabled-yet-checked checkbox
-			form.add(new CheckBox("canAdmin", Model.of(true)).setEnabled(false));
+			form.add(new HiddenField<String>("isInAdminTeam", Model.of("true")));
 		} else {
-			form.add(new CheckBox("canAdmin").setEnabled(changeAdminRole));
+			form.add(new HiddenField<String>("isInAdminTeam", Model.of("")));
 		}
+		form.add(new CheckBox("canAdmin").setEnabled(changeAdminRole));
 
 		if (userModel.canFork() && !userModel.canFork) {
 			// user inherits Fork permission

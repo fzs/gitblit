@@ -4,10 +4,39 @@
       xml:lang="en"  
       lang="en"> 
 
+<wicket:head>
+  <style type="text/css">
+    .inherit[readonly]:not([disabled]) {
+      cursor: copy;
+    }
+    .inherit[readonly] {
+      cursor: no-drop; /* IE */
+    }
+    .inherit[disabled] {
+      cursor: not-allowed; /* IE */
+    }
+  </style>
+</wicket:head>
 <wicket:extend>
-<body onload="document.getElementById('username').focus();">
+<body onload="document.getElementById('username').focus(); ts(document.getElementById('canAdminCB'))">
+
+<script>function ts(cb) {
+	var catt = document.getElementById('isInAdminTeam').value;
+	if (!cb.checked) {
+		if (catt) {
+			cb.indeterminate = cb.readOnly = true;
+		}
+	}
+	else {
+		cb.indeterminate = cb.readOnly = false;
+	}
+}
+</script>
+
 <!-- User Table -->
 <form style="padding-top:5px;" wicket:id="editForm">
+
+<input id="isInAdminTeam" wicket:id="isInAdminTeam" type="hidden" value="false"/>
 
 <div class="row">
 <div class="span12">
@@ -31,7 +60,7 @@
 				<tr><th><wicket:message key="gb.confirmPassword"></wicket:message></th><td class="edit"><input type="password" wicket:id="confirmPassword" size="30" tabindex="3" /></td></tr>
 				<tr><th><wicket:message key="gb.displayName"></wicket:message></th><td class="edit"><input type="text" wicket:id="displayName" size="30" tabindex="4" /></td></tr>
 				<tr><th><wicket:message key="gb.emailAddress"></wicket:message></th><td class="edit"><input type="text" wicket:id="emailAddress" size="30" tabindex="5" /></td></tr>
-				<tr><th><wicket:message key="gb.canAdmin"></wicket:message></th><td class="edit"><label class="checkbox"><input type="checkbox" wicket:id="canAdmin" tabindex="6" /> &nbsp;<span class="help-inline"><wicket:message key="gb.canAdminDescription"></wicket:message></span></label></td></tr>
+				<tr><th><wicket:message key="gb.canAdmin"></wicket:message></th><td class="edit"><label class="checkbox"><input class="inherit" id="canAdminCB" type="checkbox" wicket:id="canAdmin" tabindex="6" onClick="ts(this)"/> &nbsp;<span class="help-inline"><wicket:message key="gb.canAdminDescription"></wicket:message></span></label></td></tr>
 				<tr><th><wicket:message key="gb.canCreate"></wicket:message></th><td class="edit"><label class="checkbox"><input type="checkbox" wicket:id="canCreate" tabindex="7" /> &nbsp;<span class="help-inline"><wicket:message key="gb.canCreateDescription"></wicket:message></span></label></td></tr>
 				<tr><th><wicket:message key="gb.canFork"></wicket:message></th><td class="edit"><label class="checkbox"><input type="checkbox" wicket:id="canFork" tabindex="8" /> &nbsp;<span class="help-inline"><wicket:message key="gb.canForkDescription"></wicket:message></span></label></td></tr>
 				<tr><th><wicket:message key="gb.excludeFromFederation"></wicket:message></th><td class="edit"><label class="checkbox"><input type="checkbox" wicket:id="excludeFromFederation" tabindex="9" /> &nbsp;<span class="help-inline"><wicket:message key="gb.excludeFromFederationDescription"></wicket:message></span></label></td></tr>				
