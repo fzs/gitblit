@@ -1,2 +1,6 @@
 language: java
 
+build:
+  ci:
+    - mkdir -p shippable/testresults
+    - cp -a build/tests/* shippable/testresults
