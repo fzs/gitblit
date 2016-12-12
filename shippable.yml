@@ -3,4 +3,5 @@ language: java
 build:
   ci:
     - mkdir -p shippable/testresults
+    - ant test
     - cp -a build/tests/* shippable/testresults
