@@ -1,0 +1,15 @@
+compile:
+  override:
+    - ant
+
+test:
+  override:
+    - ant test
+  post:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - cp -a build/tests/* $CIRCLE_TEST_REPORTS/junit/
+
+general:
+  artifacts:
+    - "build/target/reports"
+
