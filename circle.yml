@@ -1,4 +1,7 @@
 compile:
+  pre:
+    - java -version
+    - javac -version
   override:
     - ant
 
