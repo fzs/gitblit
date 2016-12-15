@@ -5,3 +5,10 @@ build:
     - mkdir -p shippable/testresults
     - cp -a build/tests/* shippable/testresults
     - mkdir -p shippable/codecoverage
+
+integrations:
+  notifications:
+    - integrationName: email
+      type: email
+      recipients:
+        - --last_committer
