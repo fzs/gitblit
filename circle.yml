@@ -1,4 +1,11 @@
+machine:
+  java:
+    version: openjdk7
+
 compile:
+  pre:
+    - java -version
+    - javac -version
   override:
     - ant
 
