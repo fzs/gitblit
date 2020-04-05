@@ -11,15 +11,6 @@
 <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
 <link rel='shortcut icon' type='image/png' href='./gitblt-favicon.png' />
 <link rel="stylesheet" href="./prettify/prettify.css" />
-<!-- Google Plus Profile Page -->
-<link rel="publisher" href="https://plus.google.com/114464678392593421684" />
-<style type="text/css"> a.gpluspage { margin-top:3px;text-decoration: none; } </style>
-
-<!-- Google Plus One -->
-<link rel="canonical" href="http://gitblit.com" />
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-<style type="text/css"> div.gplusone { margin-top:12px; } </style>
-
 <script src="./prettify/prettify.js"></script>
 <script src="./bootstrap/js/jquery.js"></script>
 <script src="./bootstrap/js/bootstrap.min.js"></script>
@@ -120,20 +111,21 @@
 <li class='dropdown'> <!-- Menu -->
 <a class='dropdown-toggle' href='#' data-toggle='dropdown'>downloads<b class='caret'></b></a>
 <ul class='dropdown-menu'>
-<li><a href='http://dl.bintray.com/gitblit/releases/gitblit-1.8.0.zip'>Gitblit GO (Windows)</a></li>
-<li><a href='http://dl.bintray.com/gitblit/releases/gitblit-1.8.0.tar.gz'>Gitblit GO (Linux/OSX)</a></li>
-<li><a href='http://dl.bintray.com/gitblit/releases/gitblit-1.8.0.war'>Gitblit WAR</a></li>
+<li><a href='https://github.com/gitblit/gitblit/releases/download/v1.9.1/gitblit-1.9.1.zip'>Gitblit GO (Windows)</a></li>
+<li><a href='https://github.com/gitblit/gitblit/releases/download/v1.9.1/gitblit-1.9.1.tar.gz'>Gitblit GO (Linux/OSX)</a></li>
+<li><a href='https://github.com/gitblit/gitblit/releases/download/v1.9.1/gitblit-1.9.1.war'>Gitblit WAR</a></li>
 <li class='divider'></li>
 <li><a href='https://registry.hub.docker.com/u/jmoger/gitblit/'>Gitblit GO (Docker)</a></li>
 <li class='divider'></li>
 <li><a href='http://plugins.gitblit.com'>Plugins Registry</a></li>
 <li class='divider'></li>
-<li><a href='http://dl.bintray.com/gitblit/releases/manager-1.8.0.zip'>Gitblit Manager</a></li>
-<li><a href='http://dl.bintray.com/gitblit/releases/fedclient-1.8.0.zip'>Federation Client</a></li>
+<li><a href='https://github.com/gitblit/gitblit/releases/download/v1.9.1/manager-1.9.1.zip'>Gitblit Manager</a></li>
+<li><a href='https://github.com/gitblit/gitblit/releases/download/v1.9.1/fedclient-1.9.1.zip'>Federation Client</a></li>
 <li class='divider'></li>
-<li><a href='http://dl.bintray.com/gitblit/releases/gbapi-1.8.0.zip'>API Library</a></li>
+<li><a href='https://github.com/gitblit/gitblit/releases/download/v1.9.1/gbapi-1.9.1.zip'>API Library</a></li>
 <li class='divider'></li>
-<li><a href='https://bintray.com/gitblit/releases/gitblit'>Bintray (1.4.0+)</a></li>
+<li><a href='https://github.com/gitblit/gitblit/releases'>GitHub (1.9.0+)</a></li>
+<li><a href='https://bintray.com/gitblit/releases/gitblit'>Bintray (1.4.0-1.8.0)</a></li>
 <li><a href='https://code.google.com/p/gitblit/downloads/list?can=1'>GoogleCode (pre-1.4.0)</a></li>
 <li class='divider'></li>
 <li><a href='http://gitblit.github.io/gitblit-maven'>Maven Repository</a></li>
@@ -158,7 +150,7 @@
 <li><a href='https://twitter.com/JamesMoger'>@JamesMoger</a></li>
 </ul></li> <!-- End Menu -->
 <li class='divider-vertical'></li>
-<li><a href='https://plus.google.com/114464678392593421684?prsrc=3' class='gpluspage'><img src='https://ssl.gstatic.com/images/icons/gplus-16.png' width='16' height='16 style='order: 0;'/></a></li><li><div class='gplusone'><g:plusone size='small' href='http://gitblit.com'></g:plusone></div></li>
+
 						</ul>
 					</div><!--/.nav-collapse -->
 				</div>
@@ -168,67 +160,24 @@
 <!-- Begin Markdown -->
 
 <!-- CURRENT RELEASE -->
-	<h3 id="1.8.0" class="section"><a href="#1.8.0" class="sectionlink"><i class="icon-share-alt"> </i></a>Current Release (1.8.0) <small>this is the current stable release</small></h3>
+	<h3 id="1.9.1" class="section"><a href="#1.9.1" class="sectionlink"><i class="icon-share-alt"> </i></a>Current Release (1.9.1) <small>this is the current stable release</small></h3>
 	<table class="table">
 		<tbody>
 			<tr>
-				<td style="background-color:inherit;width:100px">2016-06-22</td>
+				<td style="background-color:inherit;width:100px">2020-04-05</td>
 				<td style="background-color:inherit;">	
 	
+		<blockquote><p>!! IMPORTANT BUG FIX FOR PASSWORD HASH UPGRADE !!<br /><br />There is a severe bug in version 1.9.0, which can lock users out from their accounts.<br />When updating from a previous version to 1.9.0, existing stored passwords are rehashed<br />with a more secure password hash mechanism when a user first logs in after the update.<br />This happens when the password hashing mechanism was left at default and not specifically<br />set in the configuration. An error in the implementation will destroy the stored password<br />instead and the user can no longer log in.<br /><br />Only certain circumstances will lead to this wrong behaviour. It will most likely<br />affect users of the Gitblit Docker container. If you did not encounter any problems,<br />update to 1.9.1 to be on the safe side. If you were hit by this bug, we are deeply sorry.<br />There is no way to fix the affected accounts other than to set a new password.<br /><br />This is fixed in 1.9.1. Updates of existing installations should be made to 1.9.1, not 1.9.0.<br /></p></blockquote>		
 
+		<div class="alert alert-info">
+			<h4>Note</h4>
+			When you have Gitblit installed as a service under Linux or Windows, you may need to edit your service script/definition. The command line to start Gitblit needs to be different, the classpath and class are speficied now.<p /><p />See notes for release 1.9.0.<p />
+		</div>
 
-   	<h4 style="color:red;">security</h4>
-	<ul>
-		<li>Fixed bug in My Tickets which would expose ticket metadata (title, type, etc) for private repos. (<a href='https://github.com/gitblit/gitblit/pull/1040'>pull request #1040</a>)</li>
-	</ul>
    	<h4>fixes</h4>
 	<ul>
-		<li>Fix HTML5 date input support (<a href='https://github.com/gitblit/gitblit/pull/982'>pull request #982</a>)</li>
-		<li>Honor disable ticket repository setting (<a href='https://github.com/gitblit/gitblit/pull/1045'>pull request #1045</a>)</li>
-		<li>Fix paging on filestore items (<a href='https://github.com/gitblit/gitblit/pull/1070'>pull request #1070</a>)</li>
-		<li>Fix redirects on session loss (<a href='https://github.com/gitblit/gitblit/pull/1087'>pull request #1087</a>)</li>
-		<li>Fix always searching all repositories (<a href='https://github.com/gitblit/gitblit/pull/1060'>pull request #1060</a>)</li>
-		<li>Fix RPC list branches for requests without admin powers (<a href='https://github.com/gitblit/gitblit/pull/994'>pull request #994</a>)</li>
-		<li>Fix baseURL handling when generating urls (<a href='https://github.com/gitblit/gitblit/pull/1086'>pull request #1086</a>)</li>
-		<li>Fix my tickets ignoring repo read permissions (<a href='https://github.com/gitblit/gitblit/pull/1040'>pull request #1040</a>)</li>
-		<li>Fix bug where jgit.packedGitOpenFiles was not properly set (<a href='https://github.com/gitblit/gitblit/pull/1049'>pull request #1049</a>)</li>
-		<li>Fix encoding of JavaDoc</li>
-	</ul>
-   	<h4>changes</h4>
-	<ul>
-		<li>Sort filestore by most recent first (<a href='https://github.com/gitblit/gitblit/pull/1061'>pull request #1061</a>)</li>
-		<li>Improve the document editor tablet support (<a href='https://github.com/gitblit/gitblit/pull/1062'>pull request #1062</a>)</li>
-		<li>Improve HTTP header authentication (<a href='https://github.com/gitblit/gitblit/pull/980'>pull request #980</a>)</li>
-		<li>Improve authentication logging (<a href='https://github.com/gitblit/gitblit/pull/981'>pull request #981</a>)</li>
-		<li>Improve logic of handling dot files in the raw servlet (<a href='https://github.com/gitblit/gitblit/pull/983'>pull request #983</a>)</li>
-		<li>Change Jenkins Groovy script to support any protocol (<a href='https://github.com/gitblit/gitblit/pull/986'>pull request #986</a>)</li>
-		<li>Remove empty catch blocks swallowing exceptions during authentication (<a href='https://github.com/gitblit/gitblit/pull/979'>pull request #979</a>)</li>
-		<li>Various documentation improvements</li>
-	</ul>
-   	<h4>additions</h4>
-	<ul>
-		<li>Delete patchset feature (<a href='https://github.com/gitblit/gitblit/pull/1039'>pull request #1039</a>)</li>
-		<li>Support ticket references from tickets and commits on other branches (<a href='https://github.com/gitblit/gitblit/pull/1048'>pull request #1048</a>)</li>
-		<li>YouTrack Groovy push hook (<a href='https://github.com/gitblit/gitblit/pull/1084'>pull request #1084</a>)</li>
-	</ul>
-   	<h4>dependency changes</h4>
-	<ul>
-		<li>Prosemirror 0.6.1</li>
-	</ul>
-   	<h4>contributors</h4>
-	<ul>
-		<li>dbywalec</li>
-		<li>dsteinkopf</li>
-		<li>James Moger</li>
-		<li>mereth</li>
-		<li>metasim</li>
-		<li>mrjoel</li>
-		<li>Paul Martin</li>
-		<li>pingunaut</li>
-		<li>RedShift1</li>
-		<li>rgroux</li>
-		<li>stummb</li>
-		<li>yyjdelete</li>
+		<li>Fixed broken password hash upgrade destroying existing stored passwords on update.</li>
+		<li>Fixed Linux service scripts to use `-cp` parameter instead of `-jar`.</li>
 	</ul>
 </td>
 			</tr>
@@ -244,7 +193,7 @@
 </div>
 
 <!-- End Markdown -->
-<footer class="footer"><p class="pull-right">generated 2016-06-22</p>
+<footer class="footer"><p class="pull-right">generated 2020-04-05</p>
 <p>The content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 License</a>.</p>
 </footer>
 </div>
